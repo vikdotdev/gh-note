@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -e
+
+# Determine if an executable is in the PATH
+if ! type -p ruby >/dev/null; then
+  echo "Ruby not found on the system" >&2
+  exit 1
+fi
+
+# Always run ruby relative to this scripts directory
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+cd "$parent_path"
+
+ruby ./main.rb "$@"
